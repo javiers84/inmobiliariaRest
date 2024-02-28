@@ -175,11 +175,6 @@ const actualizarPropiedad = async(req, res = response) => {
             retorno.imagen3 = "upload/" + nombreArchivo3;
             retorno.imagen4 = "upload/" + nombreArchivo4;
             retorno.imagen5 = "upload/" + nombreArchivo5;
-            // propiedadesAdd.imagen1 = "upload/" + nombreArchivo1;
-            // propiedadesAdd.imagen2 = "upload/" + nombreArchivo2;
-            // propiedadesAdd.imagen3 = "upload/" + nombreArchivo3;
-            // propiedadesAdd.imagen4 = "upload/" + nombreArchivo4;
-            // propiedadesAdd.imagen5 = "upload/" + nombreArchivo5;
 
             fs.writeFile("public/upload/" + nombreArchivo1, imagen1, 'base64', (error) => {
                 fs.writeFile("public/upload/" + nombreArchivo2, imagen2, 'base64', (error) => {
