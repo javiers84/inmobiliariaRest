@@ -190,7 +190,7 @@ const loginUsuario = async(req, res = response) => {
     // }
 }
 
-//////// BUSCAR USUARIO ///////////////
+//////// BUSCAR USUARIOS ///////////////
 const buscarUsuarios = async(req, res = response) => {
     
     try {
@@ -252,6 +252,10 @@ const validarToken = async(req, res = response) => {
         token
     });
 }
+
+
+///////// RESET PASS ////////////////
+
 
 module.exports = {
     crearUsuario,

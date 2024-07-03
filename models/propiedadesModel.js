@@ -29,6 +29,7 @@ var propiedadesSchema = new Schema({
     seguridad: Boolean,
     porteria: Boolean,
     cloacas: Boolean,
+    mostrar: Boolean,
     imagen1: String,
     imagen2: String,
     imagen3: String,

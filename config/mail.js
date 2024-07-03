@@ -3,24 +3,24 @@ const nodemailer = require('nodemailer');
 
 
 module.exports = (formulario) => {
-    // var transporter = nodemailer.createTransport({
-    //     service: gmail,
-    //     auth: {
-    //         user: 'makako84@gmail.com',
-    //         pass: 'reyvaj++1984'
-    //     }
-    // });
-
     var transporter = nodemailer.createTransport({
-        "host": "smtp.gmail.com",
-        "port": "465",
-        "secure": false,
-        "auth": {
-            "type": "login",
-            "user": "makako84@gmail.com",
-            "pass": "reyvaj++1984"
+        service: gmail,
+        auth: {
+            user: 'makako84@gmail.com',
+            pass: 'reyvaj++1984'
         }
     });
+
+    // var transporter = nodemailer.createTransport({
+    //     "host": "smtp.gmail.com",
+    //     "port": "465",
+    //     "secure": false,
+    //     "auth": {
+    //         "type": "login",
+    //         "user": "makako84@gmail.com",
+    //         "pass": "reyvaj++1984"
+    //     }
+    // });
 
     const mailOption = {
         from: `${formulario.nombre} <${formulario.correo}>`,

@@ -29,4 +29,9 @@ router.get('/buscarUsuario/:id', validarCampos, buscarUsuario);
 ////// VALIDAR TOKEN ///////////////
 router.get('/validarToken', validarJWT, validarToken);
 
+////// RESET PASS ///////////////
+router.post( () => {
+
+});
+
 module.exports = router;

@@ -36,6 +36,7 @@ const agregarPropiedad = async(req, res = response) => {
     propiedadesAdd.seguridad = req.body.seguridad;
     propiedadesAdd.porteria = req.body.porteria;
     propiedadesAdd.cloacas = req.body.cloacas;
+    propiedadesAdd.mostrar = req.body.mostrar;
     propiedadesAdd.idPropietario = req.body.idPropietario;
 
     if (req.body.imagen1 != "" && req.body.imagen2 != "" && req.body.imagen3 !=
@@ -155,10 +156,11 @@ const actualizarPropiedad = async(req, res = response) => {
         retorno.seguridad = req.body.seguridad;
         retorno.porteria = req.body.porteria;
         retorno.cloacas = req.body.cloacas;
+        retorno.mostrar = req.body.mostrar;
         retorno.idPropietario = req.body.idPropietario;
 
-        if (req.body.imagen1 != "" && req.body.imagen2 != "" && req.body.imagen3 !=
-            "" && req.body.imagen4 != "" && req.body.imagen5 != null) {
+        if (req.body.imagen1 != null && req.body.imagen2 != null && req.body.imagen3 !=
+            null && req.body.imagen4 != null && req.body.imagen5 != null) {
             var imagen1 = req.body.imagen1;
             var imagen2 = req.body.imagen2;
             var imagen3 = req.body.imagen3;
