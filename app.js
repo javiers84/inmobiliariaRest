@@ -18,7 +18,7 @@ dbConnection();
 app.use(cors());
 app.use(methodOverride());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.json({ limit: '100mb' }));
+app.use(express.json({ limit: '2048mb' }));
 app.use(express.static('public'));
 
 // app.use(process.env.path, express.static(__dirname + "public/upload/"));
