@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { agregarPropiedad, buscarPropiedades, buscarPropiedad, actualizarPropiedad, eliminarPropiedad } = require('../controllers/propiedadesController');
+const { agregarPropiedad, buscarPropiedades, buscarPropiedad, actualizarPropiedad, eliminarPropiedad, actualizarItem } = require('../controllers/propiedadesController');
 const { validarCampos } = require('../middlewares/validar-campos');
 const { validarJWT } = require('../middlewares/validar-jwt');
 
@@ -19,6 +19,9 @@ router.get('/buscarPropiedad/:id', buscarPropiedad);
 
 ////// ACTUALIZAR PROPIEDAD ///////////////
 router.put('/actualizarPropiedad/:id', actualizarPropiedad);
+
+////// ACTUALIZAR ITEM ///////////////
+router.put('/actualizarItem/:id', actualizarItem);
 
 ////// ELIMINAR PROPIEDAD ///////////////
 router.delete('/eliminarPropiedad/:id', eliminarPropiedad);

@@ -201,6 +201,24 @@ const actualizarPropiedad = async(req, res = response) => {
     });
 }
 
+
+///////// ACTUALIZAR 1 ITEM PROPIEDAD ////////////////
+const actualizarItem = async(req, res = response) => {
+
+
+    propiedad.findById(req.params.id, (err, retorno) => {
+        
+        console.log("id para modif el mostrar: " + req.params.id);
+        console.log("valor del mostrar: " + req.body.mostrar);
+        retorno.mostrar = req.body.mostrar;
+
+            retorno.save((error, respuesta) => {
+                if (error) res.send({ estado: { codigo: 0, respuesta: error.message } });
+                    res.send({ estado: { codigo: 1, respuesta: "operacion actualizar propiedad exitosa " }, propiedad: respuesta });
+            }, {$set:{mostrar: req.body.mostrar}});
+    });
+}
+
 /////// ELIMINAR PROPIEDAD ////////
 const eliminarPropiedad = async(req, res = response) => {
 
@@ -221,5 +239,6 @@ module.exports = {
     buscarPropiedades,
     buscarPropiedad,
     actualizarPropiedad,
+    actualizarItem,
     eliminarPropiedad
 }
