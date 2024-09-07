@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { agregarPropiedad, buscarPropiedades, buscarPropiedad, actualizarPropiedad, eliminarPropiedad, actualizarItem } = require('../controllers/propiedadesController');
+const { agregarPropiedad, buscarPropiedades, buscarPropiedad, actualizarPropiedad, actualizarItem, eliminarPropiedad } = require('../controllers/propiedadesController');
 const { validarCampos } = require('../middlewares/validar-campos');
 const { validarJWT } = require('../middlewares/validar-jwt');
 
