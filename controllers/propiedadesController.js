@@ -127,6 +127,8 @@ const buscarPropiedad = async(req, res = response) => {
 ///////// ACTUALIZAR PROPIEDAD ////////////////
 const actualizarPropiedad = async(req, res = response) => {
 
+    console.log('pasamos por el modificar propiedad');
+
 
     propiedad.findById(req.params.id, (err, retorno) => {
         retorno.zona = req.body.zona;

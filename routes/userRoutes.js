@@ -30,8 +30,8 @@ router.get('/buscarUsuario/:id', validarCampos, buscarUsuario);
 router.get('/validarToken', validarJWT, validarToken);
 
 ////// RESET PASS ///////////////
-router.post( () => {
+// router.post( () => {
 
-});
+// });
 
 module.exports = router;
