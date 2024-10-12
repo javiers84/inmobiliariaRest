@@ -1,6 +1,6 @@
 const { response } = require('express');
 
-const propiedad = require('../models/propiedadesModel');
+const propiedadesSchema = require('../models/propiedadesModel');
 
 ///////// AGREGAR PROPIEDAD ///////////////
 
@@ -83,7 +83,7 @@ const agregarPropiedad = async(req, res = response) => {
 ///////// BUSCAR PROPIEDADES ////////////////
 const buscarPropiedades = async(req, res = response) => {
 
-    propiedad.find({}).populate('idPropietario').exec((error, respuesta) => {
+    propiedadesSchema.find({}).populate('idPropietario').exec((error, respuesta) => {
 
         if (error) res.send({ estado: { codigo: 0, respuesta: error.message } });
         // res.json({
@@ -99,30 +99,37 @@ const buscarPropiedades = async(req, res = response) => {
 ///////// BUSCAR PROPIEDAD ////////////////
 const buscarPropiedad = async(req, res = response) => {
 
-    propiedad.findById(req.params.id).populate('idPropietario').exec((err, retorno) => {
+    // const { id } = req.params;
+    // propiedad.findById(id).exec((err, retorno) => {
     
-        if (err) res.send({ estado: { codigo: 0, respuesta: err.message } });
-        res.send({ estado: { codigo: 1, respuesta: "operacion buscar propiedad por id exitosa " }, propiedad: retorno }).headersSent;
-    });
-}
+    //     if (err) res.send({ estado: { codigo: 0, respuesta: err.message } });
+    //     res.send({ estado: { codigo: 1, respuesta: "operacion buscar propiedad por id exitosa " }, propiedad: retorno }).headersSent;
+    // });
+
 
 
 
 // const { id } = req.params;
-// try {
-//     const propiedad = await propiedad.findById(id).populate('idPropietario');
-//     res.json({
-//         ok: true,
-//         msg: 'Propiedad encontrada',
-//         propiedad
-//     });
-// } catch (error) {
-//     res.status(500).json({
-//         ok: false,
-//         msg: 'Hable con el Administrador de la Web'
-//     });
-// }
-// }
+// propiedad
+// .findById(id)
+// .then((propiedad) => res.json(propiedad))
+// .catch((error) => res.json({mensaje: error}));
+
+const { id } = req.params;
+try {
+    const propiedad = await propiedadesSchema.findById(id);
+    res.json({
+        ok: true,
+        msg: 'Propiedad encontrada',
+        propiedad
+    });
+} catch (error) {
+    res.status(500).json({
+        ok: false,
+        msg: 'Hable con el Administrador de la Web'
+    });
+}
+}
 
 ///////// ACTUALIZAR PROPIEDAD ////////////////
 const actualizarPropiedad = async(req, res = response) => {
@@ -130,7 +137,7 @@ const actualizarPropiedad = async(req, res = response) => {
     console.log('pasamos por el modificar propiedad');
 
 
-    propiedad.findById(req.params.id, (err, retorno) => {
+    propiedadesSchema.findById(req.params.id, (err, retorno) => {
         retorno.zona = req.body.zona;
         retorno.codigo = req.body.codigo;
         retorno.domicilio = req.body.domicilio;
@@ -208,7 +215,7 @@ const actualizarPropiedad = async(req, res = response) => {
 const actualizarItem = async(req, res = response) => {
 
 
-    propiedad.findById(req.params.id, (err, retorno) => {
+    propiedadesSchema.findById(req.params.id, (err, retorno) => {
         
         console.log("id para modif el mostrar: " + req.params.id);
         console.log("valor del mostrar: " + req.body.mostrar);
@@ -225,7 +232,7 @@ const actualizarItem = async(req, res = response) => {
 const eliminarPropiedad = async(req, res = response) => {
 
 
-    propiedad.findById(req.params.id, (err, retorno) => {
+    propiedadesSchema.findById(req.params.id, (err, retorno) => {
 
         retorno.remove((err, respuesta) => {
 
