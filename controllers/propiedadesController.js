@@ -8,7 +8,7 @@ const agregarPropiedad = async(req, res = response) => {
 
     console.log('entramos en el agregar propiedades del controller')
 
-    var propiedadesAdd = new propiedad();
+    var propiedadesAdd = new propiedadesSchema();
     propiedadesAdd.zona = req.body.zona;
     propiedadesAdd.codigo = req.body.codigo;
     propiedadesAdd.domicilio = req.body.domicilio;

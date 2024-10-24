@@ -196,7 +196,8 @@ const buscarUsuarios = async(req, res = response) => {
     try {
         // const dbUser = await usuarios.findById(id);
         
-        usuariosModel.findBy((err, retorno) => {
+        usuariosModel.find({}).populate('role').exec((err, retorno) => {
+        // usuariosModel.find((err, retorno) => {
 
             if (err) res.send({ estado: { codigo: 0, respuesta: err.message } });
             res.send({ estado: { codigo: 1, respuesta: "operacion buscar usuarios exitosa " }, usuarios: retorno });
@@ -237,6 +238,69 @@ const buscarUsuario = async(req, res = response) => {
     }
 }
 
+const modificarUsuario = async(req, res = response) => {
+
+    console.log('pasamos por el modificar usuario');
+
+
+    usuariosModel.findById(req.params.id, async (err, retorno) => {
+        retorno.user = req.body.user;
+        retorno.mail = req.body.mail;
+        retorno.password = req.body.password;
+        retorno.nombre = req.body.nombre;
+        retorno.telefono = req.body.telefono;
+        retorno.idRole = req.body.idRole;
+
+         //hashear la constraseña
+         const salt = bcrypt.genSaltSync(10);
+         dbUser.password = bcrypt.hashSync(password, salt);
+ 
+ 
+         //generar el JWT
+         const token = await generarJWT(dbUser.uid, user);
+         console.log("token jwt: " + token);
+
+         //asignar role por defecto
+        if (role) {
+            const buscarRole = await roles.find({ _id: { $in: role } });
+            dbUser.role = buscarRole.map(role => role._id);
+        } else {
+            const rol = await roles.findOne({ nombre: "visitante" });
+            dbUser.role = [rol._id];
+        }
+
+        if (req.body.imagen != null) {
+            var imagen = req.body.imagen;
+            var fs = require("fs");
+            var nombreArchivo1 = Math.random().toString() + ".jpg";
+            retorno.imagen = "upload/" + nombreArchivo1;
+
+            fs.writeFile("public/upload/" + nombreArchivo1, imagen, 'base64', (error) => {
+                retorno.save((error, respuesta) => {
+                    if (error) res.send({ estado: { codigo: 0, respuesta: error.message } });
+                        retorno.imagen1 = "upload/" + nombreArchivo1;
+                        res.send({ estado: { codigo: 1, respuesta: "operacion actualizar usuario exitosa " }, usuario: respuesta });
+                });
+            });
+        }
+    });
+}
+
+/////// ELIMINAR USUARIO ////////
+const eliminarUsuario = async(req, res = response) => {
+
+
+    usuariosModel.findById(req.params.id, (err, retorno) => {
+
+        retorno.remove((err, respuesta) => {
+
+            if (err) res.send({ estado: { codigo: 0, respuesta: err.message } });
+
+            res.send({ estado: { codigo: 1, respuesta: "operacion eliminar usuario exitosa " }, usuario: respuesta });
+        });
+    });
+}
+
 
 //////// VALIDAR TOKEN ///////////////
 const validarToken = async(req, res = response) => {
@@ -262,5 +326,7 @@ module.exports = {
     loginUsuario,
     buscarUsuarios,
     buscarUsuario,
+    modificarUsuario,
+    eliminarUsuario,
     validarToken
 }

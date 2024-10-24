@@ -37,7 +37,7 @@ var usuariosSchema = new Schema({
 
     role: {
         ref: "roles",
-        type: Schema.Types.ObjectId,
+        type: Schema.ObjectId,
     }
 });
 

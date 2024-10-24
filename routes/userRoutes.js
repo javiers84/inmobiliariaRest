@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { crearUsuario, loginUsuario, validarToken, buscarUsuario, buscarUsuarios } = require('../controllers/userController');
+const { crearUsuario, loginUsuario, validarToken, buscarUsuario, buscarUsuarios, modificarUsuario, eliminarUsuario } = require('../controllers/userController');
 const { validarCampos } = require('../middlewares/validar-campos');
 const { validarJWT } = require('../middlewares/validar-jwt');
 
@@ -21,13 +21,19 @@ router.post('/login', [
 ], loginUsuario);
 
 ////// BUSCAR USUARIOS ///////////////
-router.get('/buscarUsuario', validarCampos, buscarUsuarios);
+router.get('/buscarUsuarios', validarCampos, buscarUsuarios);
 
 ////// BUSCAR USUARIO ///////////////
 router.get('/buscarUsuario/:id', validarCampos, buscarUsuario);
 
 ////// VALIDAR TOKEN ///////////////
 router.get('/validarToken', validarJWT, validarToken);
+
+////// MODIFICAR USUARIO ////////////
+router.put('/modificarUsuario', validarCampos, modificarUsuario);
+
+////// ELIMINAR USUARIO /////////////
+router.delete('/eliminarUsuario/:id', validarCampos , eliminarUsuario);
 
 ////// RESET PASS ///////////////
 // router.post( () => {
